@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ankitha | Data Scientist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0D0D0F;
+    --bg2: #141417;
+    --bg3: #1C1C21;
+    --text: #F0EEE8;
+    --muted: #8A8A94;
+    --accent: #7CF4B0;
+    --accent2: #4ECDC4;
+    --border: rgba(255,255,255,0.08);
+    --card: #17171C;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13,13,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+  }
+  .nav-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    font-size: 14px;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; max-width: 900px; margin: 0 auto; }
+
+  /* HERO */
+  .hero {
+    padding-top: 7rem;
+    padding-bottom: 5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: start;
+  }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 1.25rem;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  .hero-desc {
+    color: var(--muted);
+    font-size: 17px;
+    max-width: 540px;
+    margin-bottom: 2rem;
+  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.6rem 1.25rem;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #0D0D0F;
+  }
+  .btn-primary:hover { background: #5de89a; }
+  .btn-ghost {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.25); background: var(--bg3); }
+
+  .avatar {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    object-fit: cover;
+    flex-shrink: 0;
+    background: var(--bg3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 3rem;
+    color: var(--accent);
+  }
+
+  /* METRICS STRIP */
+  .metrics {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 2rem;
+    background: var(--bg2);
+  }
+  .metrics-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 2rem;
+  }
+  .metric-item { text-align: center; }
+  .metric-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--accent);
+    display: block;
+  }
+  .metric-label {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* SECTION HEADERS */
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 400;
+    margin-bottom: 2.5rem;
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+  }
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+    display: flex;
+    flex-direction: column;
+  }
+  .project-card:hover { border-color: rgba(124,244,176,0.3); transform: translateY(-2px); }
+  .project-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent2);
+    background: rgba(78,205,196,0.1);
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 0.75rem;
+  }
+  .project-card h3 {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  .project-card p {
+    font-size: 14px;
+    color: var(--muted);
+    flex: 1;
+    margin-bottom: 1.25rem;
+  }
+  .project-links { display: flex; gap: 0.75rem; }
+  .project-link {
+    font-size: 13px;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    border-radius: 5px;
+    transition: all 0.2s;
+  }
+  .project-link:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .skill-group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem;
+  }
+  .skill-group-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .skill-tag {
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 3px 9px;
+    border-radius: 4px;
+  }
+
+  /* EXPERIENCE */
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .exp-item:last-child { border-bottom: none; }
+  .exp-date { font-size: 13px; color: var(--muted); padding-top: 3px; line-height: 1.5; }
+  .exp-title { font-size: 16px; font-weight: 500; margin-bottom: 3px; }
+  .exp-company { font-size: 14px; color: var(--accent2); margin-bottom: 0.75rem; }
+  .exp-bullets { list-style: none; }
+  .exp-bullets li {
+    font-size: 14px;
+    color: var(--muted);
+    padding: 3px 0 3px 1rem;
+    position: relative;
+  }
+  .exp-bullets li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--border);
+  }
+
+  /* EDUCATION */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .edu-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+  }
+  .edu-degree { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+  .edu-school { font-size: 14px; color: var(--accent2); margin-bottom: 8px; }
+  .edu-detail { font-size: 13px; color: var(--muted); }
+
+  /* CONTACT */
+  .contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 0.6rem 1rem;
+    border-radius: 7px;
+    transition: all 0.2s;
+  }
+  .contact-link:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
+  .contact-icon { font-size: 16px; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 13px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-content { animation: fadeUp 0.7s ease both; }
+  .hero .avatar  { animation: fadeUp 0.7s 0.1s ease both; }
+
+  @media (max-width: 640px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero .avatar { display: none; }
+    nav { padding: 1rem; }
+    .nav-links { gap: 1.25rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .exp-date { padding-top: 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">ankitha.dev</span>
+  <div class="nav-links">
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <p class="hero-eyebrow">// data scientist & ml engineer</p>
+    <h1>Turning messy data into<br><em>decisions that matter</em></h1>
+    <p class="hero-desc">M.S. Data Science (GPA 4.0, University of Arizona). I build end-to-end ML pipelines, NLP systems, and analytics that move the needle for real stakeholders.</p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn btn-primary">View my work ↓</a>
+      <a href="YOUR_RESUME_LINK_HERE" class="btn btn-ghost" target="_blank">Download résumé</a>
+    </div>
+  </div>
+  <div class="avatar">A</div>
+</section>
+
+<!-- METRICS STRIP -->
+<div class="metrics">
+  <div class="metrics-inner">
+    <div class="metric-item">
+      <span class="metric-num">200+</span>
+      <div class="metric-label">Production SQL queries shipped</div>
+    </div>
+    <div class="metric-item">
+      <span class="metric-num">60%</span>
+      <div class="metric-label">Reporting cycle time reduction</div>
+    </div>
+    <div class="metric-item">
+      <span class="metric-num">0.91</span>
+      <div class="metric-label">Micro-F1 on NLP classifier</div>
+    </div>
+    <div class="metric-item">
+      <span class="metric-num">4.0</span>
+      <div class="metric-label">M.S. GPA</div>
+    </div>
+    <div class="metric-item">
+      <span class="metric-num">2nd / 120</span>
+      <div class="metric-label">Power BI / DAX competition</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">// selected work</p>
+  <h2>Projects</h2>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <span class="project-tag">NLP · Multi-label classification</span>
+      <h3>Retail Customer Complaint Categorizer</h3>
+      <p>Multi-label text classification system using OpenAI Chat Completions API. Modular Python pipeline restructured from a Jupyter monolith into a production-ready repo. Achieves Micro-F1 of 0.91.</p>
+      <div class="project-links">
+        <a href="YOUR_GITHUB_LINK" class="project-link" target="_blank">GitHub ↗</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <span class="project-tag">NLP · Ensemble · LLMs</span>
+      <h3>Utterance Classification Research Pipeline</h3>
+      <p>Soft ensemble of DeBERTa-v3, Google Gemma-3-27b, Llama-3-70b, and GPT-4.1-mini for automated dialogue labeling. Best result: Cohen's κ = 0.624 (quadratic κ = 0.732).</p>
+      <div class="project-links">
+        <a href="YOUR_GITHUB_LINK" class="project-link" target="_blank">GitHub ↗</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <span class="project-tag">AWS · Serverless · Full-stack</span>
+      <h3>Student Degree Planner (AWS)</h3>
+      <p>Serverless capstone on DynamoDB, Lambda, S3, API Gateway, Step Functions, ECS/ECR with CodePipeline/CloudFormation CI/CD. End-to-end infrastructure from scratch.</p>
+      <div class="project-links">
+        <a href="YOUR_GITHUB_LINK" class="project-link" target="_blank">GitHub ↗</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <span class="project-tag">React · TypeScript · Hybrid scoring</span>
+      <h3>UAdvisor — Course Recommender</h3>
+      <p>React/TypeScript app for UA students with a hybrid scoring engine, RateMyProfessors integration, and UA-branded UI. Helps students find the right courses and instructors.</p>
+      <div class="project-links">
+        <a href="YOUR_GITHUB_LINK" class="project-link" target="_blank">GitHub ↗</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <span class="project-tag">Bayesian · R · Stan</span>
+      <h3>Chocolate Sales Bayesian Model</h3>
+      <p>Hierarchical Bayesian analysis of a Chocolate Sales dataset using brms/Stan with LOO-CV model comparison. Demonstrates probabilistic reasoning beyond point estimates.</p>
+      <div class="project-links">
+        <a href="YOUR_GITHUB_LINK" class="project-link" target="_blank">GitHub ↗</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <span class="project-tag">Power BI · DAX · Analytics</span>
+      <h3>Fortune 500 Banking Dashboards</h3>
+      <p>6–8 executive dashboards for Fortune 500 banking and technology clients at LatentView Analytics. Reduced reporting cycle time by 60%, saving ~20 hours monthly. Zero data errors over 24 months.</p>
+      <div class="project-links">
+        <a href="#contact" class="project-link">Ask me about this</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">// toolkit</p>
+  <h2>Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-title">Languages</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">R</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">TypeScript</span>
+        <span class="skill-tag">MATLAB</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">ML / NLP</div>
+      <div class="skill-tags">
+        <span class="skill-tag">PyTorch</span>
+        <span class="skill-tag">TensorFlow</span>
+        <span class="skill-tag">Transformers</span>
+        <span class="skill-tag">Hugging Face</span>
+        <span class="skill-tag">OpenAI API</span>
+        <span class="skill-tag">scikit-learn</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Analytics & BI</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Power BI</span>
+        <span class="skill-tag">Tableau</span>
+        <span class="skill-tag">Looker</span>
+        <span class="skill-tag">R Shiny</span>
+        <span class="skill-tag">DAX</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Cloud & DevOps</div>
+      <div class="skill-tags">
+        <span class="skill-tag">AWS (Lambda, DynamoDB, S3, ECS)</span>
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">Jira</span>
+        <span class="skill-tag">Snowflake (in progress)</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Certifications</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Microsoft PL-300</span>
+        <span class="skill-tag">NVIDIA FADS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">// where I've worked</p>
+  <h2>Experience</h2>
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-date">Sep 2024 –<br>May 2026</div>
+      <div>
+        <div class="exp-title">Graduate Research Assistant</div>
+        <div class="exp-company">University of Arizona · NLP / AI / ML Lab</div>
+        <ul class="exp-bullets">
+          <li>Built soft-ensemble LLM classifier pipeline (DeBERTa-v3, Gemma-3-27b, Llama-3-70b, GPT-4.1-mini) for automated utterance classification; achieved Cohen's κ = 0.624</li>
+          <li>Designed evaluation framework with quadratic weighted kappa and cross-model agreement analysis</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Jan 2025 –<br>May 2026</div>
+      <div>
+        <div class="exp-title">Graduate Assistant — Hearing Officer</div>
+        <div class="exp-company">University of Arizona · Dean of Students Office</div>
+        <ul class="exp-bullets">
+          <li>Managed student conduct hearings, FERPA-compliant case records, and policy documentation</li>
+          <li>Facilitated workshops and maintained rigorous case management processes</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Jan 2022 –<br>Apr 2024</div>
+      <div>
+        <div class="exp-title">Data Analyst</div>
+        <div class="exp-company">LatentView Analytics · Fortune 500 Banking & Technology Clients</div>
+        <ul class="exp-bullets">
+          <li>Authored 200+ production SQL queries; built 6–8 executive dashboards in Power BI with zero data errors over 24 months</li>
+          <li>Reduced reporting cycle time by 60% (~20 hrs/month) through automation and pipeline optimization</li>
+          <li>Ranked 2nd of 120 teams in internal Power BI/DAX competition; awarded Encore Q1 2024 Best Performer</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION & AWARDS -->
+<section id="education">
+  <p class="section-label">// education & honours</p>
+  <h2>Education</h2>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-degree">Master of Science — Data Science</div>
+      <div class="edu-school">University of Arizona · May 2026</div>
+      <div class="edu-detail">GPA 4.0 · Distinguished Graduate Scholar · HackArizona 2026 Runner-Up (Education Track)</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Bachelor of Technology — Electronics & Communication Engineering</div>
+      <div class="edu-school">· 2021</div>
+      <div class="edu-detail">GPA 9.16/10 · Silver Medal in Mathematics · Outstanding Award in Physics</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">// get in touch</p>
+  <h2>Let's connect</h2>
+  <p style="color: var(--muted); max-width: 500px;">Currently on OPT work authorization and open to data science, analytics engineering, and ML roles. Based in Arizona — open to remote and hybrid.</p>
+  <div class="contact-row">
+    <a href="mailto:YOUR_EMAIL@email.com" class="contact-link">
+      <span class="contact-icon">✉</span> Email me
+    </a>
+    <a href="https://linkedin.com/in/YOUR_LINKEDIN" class="contact-link" target="_blank">
+      <span class="contact-icon">in</span> LinkedIn
+    </a>
+    <a href="https://github.com/YOUR_GITHUB" class="contact-link" target="_blank">
+      <span class="contact-icon">⌥</span> GitHub
+    </a>
+  </div>
+</section>
+
+<footer>
+  Built with ♥ and raw HTML — no frameworks, no fuss.
+</footer>
+
+</body>
+</html>
