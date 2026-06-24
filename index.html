@@ -176,15 +176,85 @@ nav {
 
 footer { text-align: center; padding: 1.5rem; font-size: 13px; color: var(--muted); border-top: 1px solid var(--border); font-style: italic; }
 
+/* HAMBURGER */
+.nav-hamburger {
+  display: none; flex-direction: column; justify-content: center;
+  gap: 5px; cursor: pointer; padding: 4px; border: none;
+  background: transparent; z-index: 200;
+}
+.nav-hamburger span {
+  display: block; width: 22px; height: 2px;
+  background: var(--text); border-radius: 2px;
+  transition: all 0.25s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* MOBILE — everything under 680px */
 @media(max-width:680px){
-  .hero-inner { grid-template-columns: 1fr; }
+
+  /* NAV */
+  nav { padding: 0.9rem 1.25rem; position: relative; }
+  .nav-logo { font-size: 11px; max-width: 200px; }
+  .nav-hamburger { display: flex; }
+  .nav-links {
+    display: none; flex-direction: column; gap: 0;
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: rgba(253,252,251,0.97); backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.5rem 0; z-index: 150;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a {
+    padding: 0.8rem 1.5rem; font-size: 15px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-links a:last-child { border-bottom: none; }
+
+  /* HERO */
+  .hero-section { min-height: auto; padding: 4rem 1.25rem 3rem; }
+  .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
   .hero-photo { display: none; }
-  .about-inner { grid-template-columns: 1fr; }
+  .hero-tag { font-size: 11px; }
+  .hero-name-line h4 { font-size: 14px; }
+  .hero-pitch { font-size: 15px; }
+  .hero-ctas { flex-direction: column; gap: 0.75rem; }
+  .btn { width: 100%; justify-content: center; padding: 0.8rem 1rem; }
+
+  /* COMPANIES */
+  .companies-section { padding: 3rem 1.25rem; }
+  .company-pills { gap: 0.5rem; }
+  .company-pill { font-size: 13px; padding: 7px 14px; }
+  .resume-cta { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .resume-cta .btn { width: 100%; justify-content: center; }
+
+  /* PROJECTS */
+  .projects-section { padding: 3rem 1.25rem; }
+  .proj-row { grid-template-columns: 1fr; gap: 0.75rem; padding: 1.35rem 0; }
+  .learn-btn { align-self: flex-start; margin-top: 0.25rem; }
+  .proj-name { font-size: 16px; }
+
+  /* ABOUT */
+  .about-section { padding: 3rem 1.25rem; }
+  .about-inner { grid-template-columns: 1fr; gap: 2rem; }
   .about-photo-wrap { order: -1; }
-  nav { padding: 1rem; }
-  .nav-links { gap: 1rem; }
-  .proj-row { grid-template-columns: 1fr; gap: 1rem; }
-  .learn-btn { align-self: flex-start; }
+  .about-photo-wrap img { aspect-ratio: 4/3; border-radius: 14px; }
+
+  /* SKILLS */
+  .skills-section { padding: 3rem 1.25rem; }
+  .skills-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .resume-banner { flex-direction: column; align-items: flex-start; padding: 1.25rem; }
+  .resume-banner .btn-primary { width: 100%; justify-content: center; }
+
+  /* CONTACT */
+  .contact-section { padding: 3rem 1.25rem; }
+  .contact-cards { flex-direction: column; align-items: stretch; }
+  .contact-card { justify-content: center; }
+  .contact-avail { font-size: 12px; text-align: center; flex-wrap: wrap; justify-content: center; }
+
+  /* FOOTER */
+  footer { font-size: 12px; padding: 1.25rem; }
 }
 </style>
 </head>
@@ -192,12 +262,15 @@ footer { text-align: center; padding: 1.5rem; font-size: 13px; color: var(--mute
 
 <nav>
   <span class="nav-logo">Turning messy data into decisions that matter</span>
-  <div class="nav-links">
-    <a href="#companies">Experience</a>
-    <a href="#projects">Projects</a>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#contact">Contact</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links" id="nav-links">
+    <a href="#companies" onclick="closeMenu()">Experience</a>
+    <a href="#projects" onclick="closeMenu()">Projects</a>
+    <a href="#about" onclick="closeMenu()">About</a>
+    <a href="#skills" onclick="closeMenu()">Skills</a>
+    <a href="#contact" onclick="closeMenu()">Contact</a>
   </div>
 </nav>
 
@@ -337,7 +410,7 @@ footer { text-align: center; padding: 1.5rem; font-size: 13px; color: var(--mute
   <div class="about-inner">
 
     <div class="about-left">
-      <p class="about-section-eyebrow">A little more about me</p>
+      <p class="about-section-eyebrow">// a little more about me</p>
       <h2 class="about-heading">A <em>Little</em> About Me</h2>
 
       <p class="about-bio">I was born and raised in India and moved to Tucson for my Master's — and fell in love with the desert sunsets along the way. I've spent the last few years at the intersection of data, research, and real stakeholder problems.</p>
@@ -355,7 +428,7 @@ footer { text-align: center; padding: 1.5rem; font-size: 13px; color: var(--mute
           <div class="about-fact-icon">🎓</div>
           <div class="about-fact-text">
             <strong>Education</strong>
-            <span>M.S. Data Science, University of Arizona (GPA 4.0, May 2026) · on OPT, actively looking for full-time/ internships</span>
+            <span>M.S. Data Science, University of Arizona (GPA 4.0, May 2026) · on OPT, actively looking</span>
           </div>
         </div>
         <div class="about-fact">
@@ -386,8 +459,9 @@ footer { text-align: center; padding: 1.5rem; font-size: 13px; color: var(--mute
 <!-- SKILLS -->
 <section class="skills-section" id="skills">
   <div class="skills-inner">
-    <p class="section-eyebrow">Toolkit</p>
+    <p class="section-eyebrow">// toolkit</p>
     <h2>Skills & tools</h2>
+    <p class="skills-intro">Everything I reach for day-to-day — grouped by what it does.</p>
 
     <div class="skills-grid">
       <div class="skill-group">
@@ -488,6 +562,7 @@ footer { text-align: center; padding: 1.5rem; font-size: 13px; color: var(--mute
         <div class="skill-chips">
           <span class="skill-chip">Microsoft PL-300 (Power BI)</span>
           <span class="skill-chip">NVIDIA Fundamentals of Accelerated Data Science</span>
+          <span class="skill-chip">Snowflake — in progress</span>
         </div>
       </div>
     </div>
@@ -528,6 +603,19 @@ footer { text-align: center; padding: 1.5rem; font-size: 13px; color: var(--mute
 </section>
 
 <footer>Some people build the models. Some people tell the story. I do both.</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.getElementById('nav-links');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+  }
+</script>
 
 </body>
 </html>
